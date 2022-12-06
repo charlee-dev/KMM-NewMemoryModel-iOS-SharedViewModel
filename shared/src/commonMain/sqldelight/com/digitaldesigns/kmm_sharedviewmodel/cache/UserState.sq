@@ -1,0 +1,15 @@
+CREATE TABLE UserState (
+   userId TEXT NOT NULL,
+   token TEXT NOT NULL
+);
+
+selectUserState:
+SELECT * FROM UserState
+LIMIT 1;
+
+addUserState:
+INSERT INTO UserState(userId, token)
+VALUES(?, ?);
+
+deleteUserState:
+DELETE FROM UserState;

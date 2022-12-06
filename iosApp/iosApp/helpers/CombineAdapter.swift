@@ -1,0 +1,25 @@
+//
+//  CombineAdapter.swift
+//  iosApp
+//
+//  Created by Adrian Witaszak on 17/10/2022.
+//  Copyright © 2022 orgName. All rights reserved.
+//
+
+import shared
+
+class Collector<T>: Kotlinx_coroutines_coreFlowCollector {
+    let block: (T) -> Void
+    
+    init(block: @escaping (T) -> Void) {
+        self.block = block
+    }
+    
+    func emit(value: Any?) async throws {
+        if let parsed = value as? T {
+            DispatchQueue.main.async {
+                self.block(parsed)
+            }
+        }
+    }
+}
